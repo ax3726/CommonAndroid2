@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_one"
+        android:icon="@mipmap/ic_launcher"
+        android:title="第一个界面" />
+
+    <item
+        android:id="@+id/navigation_two"
+        android:icon="@mipmap/ic_launcher"
+        android:title="第二个界面"/>
+
+    <item
+        android:id="@+id/navigation_three"
+        android:icon="@mipmap/ic_launcher"
+        android:title="第三个界面" />
+
+</menu>
