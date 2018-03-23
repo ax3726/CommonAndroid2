@@ -281,59 +281,7 @@ public abstract class BaseFragment<P extends BaseFragmentPresenter, B extends Vi
         }
     }
 
-    public abstract class BaseNetSubscriber<T> implements Subscriber<T> {
-        private Subscription subscription;
-        public BaseNetSubscriber() {
 
-        }
-        public BaseNetSubscriber(boolean bl) {
-            if (aty!=null&&bl) {
-                showWaitDialog();
-            }
-        }
-        @Override
-        public void onSubscribe(Subscription s) {
-            subscription = s;
-            s.request(1); //请求一个数据
-        }
-
-        @Override
-        public void onComplete() {
-            subscription.cancel(); //取消订阅
-            if (aty != null) {
-                hideWaitDialog();
-            }
-        }
-
-
-        @Override
-        public void onError(Throwable e) {
-            e.printStackTrace();
-            if (aty == null) {
-                return;
-            }
-            hideWaitDialog();
-            if (e instanceof HttpException) {
-                showToast("网络错误");
-            } else if (e instanceof ApiException) {
-                showToast("Aip异常");
-            } else if (e instanceof SocketTimeoutException) {
-                showToast("连接服务器超时");
-            } else if (e instanceof ConnectException) {
-                showToast("未能连接到服务器");
-            } else if (e instanceof ResultException) {
-                showToast(e.getMessage());
-            } else {
-                showToast("未知错误");
-            }
-        }
-
-        @Override
-        public void onNext(T t) {
-            //处理完后，再请求一个数据
-            subscription.request(1);
-        }
-    }
 
     public <T> FlowableTransformer<T, T> callbackOnIOToMainThread() {
         return tObservable -> tObservable.subscribeOn(Schedulers.io())
